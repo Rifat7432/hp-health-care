@@ -1,6 +1,6 @@
 import httpStatus from "http-status";
 import { authenticationServices } from "./auth.service";
-import catchAsync from "../../middlewares/catchAsync";
+import catchAsync from "../../../shared/catchAsync";
 import { sendRes } from "../../../shared/sendResponse";
 
 const loginUser = catchAsync(async (req, res) => {
@@ -19,7 +19,7 @@ const loginUser = catchAsync(async (req, res) => {
 });
 const changePassword = catchAsync(async (req, res) => {
   const result = await authenticationServices.changePasswordIntoDB(
-    // req.user,
+    req.user,
     req.body
   );
   sendRes(res, {
@@ -40,13 +40,13 @@ const refreshToken = catchAsync(async (req, res) => {
   });
 });
 const forgetPassword = catchAsync(async (req, res) => {
-  const userId = req.body;
-  const result = await authenticationServices.forgetPasswordIntoDB(userId);
+  const { email } = req.body;
+  await authenticationServices.forgetPasswordIntoDB(email);
   sendRes(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Access token is retrieve successfully",
-    data: result,
+    message: "Check your email",
+    data: null,
   });
 });
 const resetPassword = catchAsync(async (req, res) => {

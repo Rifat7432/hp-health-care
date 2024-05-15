@@ -3,7 +3,7 @@ import pick from "../../../shared/pick";
 import { adminFilterFields } from "./admin.constant";
 import { sendRes } from "../../../shared/sendResponse";
 import httpStatus from "http-status";
-import catchAsync from "../../middlewares/catchAsync";
+import catchAsync from "../../../shared/catchAsync";
 
 const getAllAdmin = catchAsync(async (req, res) => {
   const filter = pick(req.query, adminFilterFields);
