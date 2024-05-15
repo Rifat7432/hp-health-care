@@ -1,17 +1,11 @@
-import {
-  Admin,
-  Prisma,
-  PrismaClient,
-  userRole,
-  userStatus,
-} from "@prisma/client";
+import { Admin, Prisma, userStatus } from "@prisma/client";
 import { searchFields } from "./admin.constant";
 import { paginationHelper } from "../../../helper/pagination";
 import { TFilterAdmin } from "./admin.interface";
 import { TPagination } from "../../interface/pagination";
-import { any } from "zod";
+import { prisma } from "../../../app";
 
-const prisma = new PrismaClient();
+
 const getAllAdminFromDB = async (query: TFilterAdmin, options: TPagination) => {
   const { searchTerm, ...filterData } = query;
   const { page, limit, skip, sortBy, sortOrder } =
@@ -55,7 +49,7 @@ const getAllAdminFromDB = async (query: TFilterAdmin, options: TPagination) => {
     data: result,
   };
 };
-const getAdminFromDB = async (id: string):Promise<Admin | null> => {
+const getAdminFromDB = async (id: string): Promise<Admin | null> => {
   const result = await prisma.admin.findUnique({
     where: {
       id,
@@ -64,7 +58,10 @@ const getAdminFromDB = async (id: string):Promise<Admin | null> => {
   });
   return result;
 };
-const updateIntoDB = async (id: string, data: Partial<Admin>):Promise<Admin | null> => {
+const updateIntoDB = async (
+  id: string,
+  data: Partial<Admin>
+): Promise<Admin | null> => {
   await prisma.admin.findUniqueOrThrow({
     where: {
       id,
@@ -79,7 +76,7 @@ const updateIntoDB = async (id: string, data: Partial<Admin>):Promise<Admin | nu
   });
   return result;
 };
-const deleteIntoDB = async (id: string):Promise<Admin | null> => {
+const deleteIntoDB = async (id: string): Promise<Admin | null> => {
   await prisma.admin.findUniqueOrThrow({
     where: {
       id,
@@ -102,7 +99,7 @@ const deleteIntoDB = async (id: string):Promise<Admin | null> => {
 
   return result;
 };
-const softDeleteAdminIntoDB = async (id: string):Promise<Admin | null> => {
+const softDeleteAdminIntoDB = async (id: string): Promise<Admin | null> => {
   await prisma.admin.findUniqueOrThrow({
     where: {
       id,
