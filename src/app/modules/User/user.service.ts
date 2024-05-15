@@ -3,9 +3,10 @@ import bcrypt from "bcrypt";
 import { prisma } from "../../../app";
 import config from "../../config";
 import { sendImageToCloudinary } from "../../../shared/uploadImage";
+import { TFileImage } from "../../interface/ImageResponseType";
+import { TCreateAdminData } from "./user.interface";
 
-
-const createAdminIntoDB = async (data: any, file: any) => {
+const createAdminIntoDB = async (data: TCreateAdminData, file: TFileImage) => {
   const hashedPassword = await bcrypt.hash(
     data.password,
     Number(config.bcrypt_salt_rounds as string)

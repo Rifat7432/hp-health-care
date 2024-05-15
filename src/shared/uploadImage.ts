@@ -2,17 +2,17 @@ import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import multer from 'multer';
 import config from '../app/config';
+import { TImageRes } from '../app/interface/ImageResponseType';
 cloudinary.config({
   cloud_name: config.cloudinary_cloud_name,
   api_key: config.cloudinary_api_key,
   api_secret: config.cloudinary_api_secret,
 });
-export const sendImageToCloudinary = (imgName: string, path: string) => {
+export const sendImageToCloudinary = (imgName: string, path: string):Promise<TImageRes> => {
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(
       path,
-      { public_id: imgName },
-      function (error, result) {
+      function (error:Error, result:TImageRes) {
         if (error) {
           reject(error);
           fs.unlink(path, (err) => {
