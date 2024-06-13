@@ -18,4 +18,13 @@ export default {
   super_admin_password: process.env.ADMIN_PASSWORD,
   emailSender_email:process.env.EMAIL_SENDER_EMAIL,
   emailSender_pass:process.env.EMAIL_SENDER_PASS,
+  ssl: {
+    sslPaymentUrl: process.env.SSL_PAYMENT_URL,
+    validationUrl: process.env.VALIDATION_URL,
+    storeId: process.env.STORE_ID,
+    storePass: process.env.STORE_PASSWORD,
+    successUrl: process.env.SUCCESS_URL,
+    cancelUrl: process.env.CANCEL_URL,
+    failUrl: process.env.FAIL_URL,
+  },
 };

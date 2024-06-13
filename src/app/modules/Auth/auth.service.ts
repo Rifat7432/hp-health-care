@@ -7,7 +7,6 @@ import { userStatus } from "@prisma/client";
 import config from "../../config";
 import { JwtPayload } from "jsonwebtoken";
 import { AppError } from "../../../errors/appErrors";
-import e from "express";
 import { sendEmail } from "../../../shared/sendEmail";
 
 const loginUserIntoDB = async (payload: TLoginUser) => {

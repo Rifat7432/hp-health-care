@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.post(
   "/login",
-  // validateRequest(authenticationZodSchema.loginUserZodSchema),
+  validateRequest(authenticationZodSchema.loginUserZodSchema),
   authenticationControllers.loginUser
 );
 router.post(
